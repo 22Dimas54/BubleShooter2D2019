@@ -2,6 +2,9 @@ package ru.sibnsk.bubleshooter2d;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -38,12 +41,45 @@ public class Menue {
 	}
 
 	// Functions
+	private void UpdateTransparency(String transparency) {
+		if(transparency.equals("transparencyPlay")) {
+		transparencyExit = 0;
+		transparencySaveResult = 0;
+		transparencyShowResult = 0;	
+		transparencyNewGame = 0;
+		}
+		else if(transparency.equals("transparencyExit")) {
+			transparencyPlay = 0;
+			transparencySaveResult = 0;
+			transparencyShowResult = 0;	
+			transparencyNewGame = 0;
+			}
+		else if(transparency.equals("transparencySaveResult")) {
+			transparencyPlay = 0;
+			transparencyExit = 0;
+			transparencyShowResult = 0;	
+			transparencyNewGame = 0;
+			}	
+		else if(transparency.equals("transparencyShowResult")) {
+			transparencyPlay = 0;
+			transparencyExit = 0;
+			transparencySaveResult = 0;
+			transparencyNewGame = 0;
+			}	
+		else if(transparency.equals("transparencyNewGame")) {
+			transparencyPlay = 0;
+			transparencyExit = 0;
+			transparencySaveResult = 0;
+			transparencyShowResult = 0;	
+			}		
+	}
 	public void update() {
 		if (GamePanel.mouseX > GamePanel.WIDTH / 2 - buttonWidth / 2
 				&& GamePanel.mouseX < GamePanel.WIDTH / 2 + buttonWidth / 2
 				&& GamePanel.mouseY > GamePanel.HEIGTH / 3 - buttonHeigth / 2
 				&& GamePanel.mouseY < GamePanel.HEIGTH / 3 + buttonHeigth / 2) {
 			transparencyPlay = 60;
+			UpdateTransparency("transparencyPlay");
 			if (GamePanel.leftMouse) {
 				if (Player.health == 0) { // NEW GAME
 					GamePanel.player = new Player();
@@ -61,6 +97,7 @@ public class Menue {
 				&& GamePanel.mouseY > GamePanel.HEIGTH / 1.5 - buttonHeigth / 2
 				&& GamePanel.mouseY < GamePanel.HEIGTH / 1.5 + buttonHeigth / 2) {
 			transparencyExit = 60;
+			UpdateTransparency("transparencyExit");
 			if (GamePanel.leftMouse) {
 				System.exit(0);
 			}
@@ -69,22 +106,32 @@ public class Menue {
 				&& GamePanel.mouseY > GamePanel.HEIGTH / 2.25 - buttonHeigth / 2
 				&& GamePanel.mouseY < GamePanel.HEIGTH / 2.25 + buttonHeigth / 2) {
 			transparencySaveResult = 60;
+			UpdateTransparency("transparencySaveResult");
 			if (GamePanel.leftMouse) {
+				if(GamePanel.player.getPoints()>0) {
 				Result.ResultGame();
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "I am sorry 'Points' = 0 !");
+				}
+				GamePanel.leftMouse = false;
 			}
 		} else if (GamePanel.mouseX > GamePanel.WIDTH / 2 - buttonWidth / 2
 				&& GamePanel.mouseX < GamePanel.WIDTH / 2 + buttonWidth / 2
 				&& GamePanel.mouseY > GamePanel.HEIGTH / 1.8 - buttonHeigth / 2
 				&& GamePanel.mouseY < GamePanel.HEIGTH / 1.8 + buttonHeigth / 2) {
 			transparencyShowResult = 60;
+			UpdateTransparency("transparencyShowResult");
 			if (GamePanel.leftMouse) {
-				System.exit(0);
+				Result.ShowResult();
+				GamePanel.leftMouse = false;
 			}			
 		} else if (GamePanel.mouseX > GamePanel.WIDTH / 2 - buttonWidth / 2
 				&& GamePanel.mouseX < GamePanel.WIDTH / 2 + buttonWidth / 2
 				&& GamePanel.mouseY > GamePanel.HEIGTH / 5 - buttonHeigth / 2
 				&& GamePanel.mouseY < GamePanel.HEIGTH / 5 + buttonHeigth / 2) {
 			transparencyNewGame = 60;
+			UpdateTransparency("transparencyNewGame");
 			if (GamePanel.leftMouse) {
 				GamePanel.player = new Player();
 				GamePanel.bullets = new ArrayList<Bullet>();

@@ -2,11 +2,15 @@ package ru.sibnsk.bubleshooter2d;
 
 import java.io.Serializable;
 
-public class Profile implements Serializable{
+public class Profile implements Serializable,Comparable<Profile>{
 	
+	//FIELDS
 	public String name;
-	public int rezult;
+	public Integer rezult;
 	
+	//CONSTRUCTOR
+	
+	//FUNCTIONS	
 	public String getName() {
 		return name;
 	}
@@ -18,6 +22,11 @@ public class Profile implements Serializable{
 	}
 	public void setRezult(int rezult) {
 		this.rezult = rezult;
+	}
+	@Override
+	public int compareTo(Profile o) {
+		int result2 = o.rezult.compareTo(this.rezult);
+		return result2;
 	}
 
 }

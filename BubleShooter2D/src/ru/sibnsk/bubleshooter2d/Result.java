@@ -18,27 +18,28 @@ public class Result {
 
 	// FIELDS
 	private static ArrayList<Profile> profiles = new ArrayList<Profile>();
+	private static String str, str1, str2;
 
 	// CONSTRUCTOR
 
 	// FUNCTiONS
 	public static void ShowResult() {
+		str = String.format("%-35s  %10s \t \n", "Points", "Name");
+		str = str + String.format("%-15s  %35s \t \n", "", "");
 		profiles = (ArrayList<Profile>) deserializableDate("profiles");
-		System.out.println(profiles.size());
 		Collections.sort(profiles);
-		/*
-		 * @Override public int compare(Profile o1, Profile o2) { return
-		 * o1.getRezult().compareTo(o2.getRezult()); } }); }
-		 */
+
 		for (Profile p : profiles) {
-			System.out.println("Name: " + p.name + " Points: " + p.rezult);
+			str = str + String.format("%-15s  %35s \t \n", p.rezult, p.name);
+
 		}
+		JOptionPane.showMessageDialog(null, str);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static void ResultGame() {
-		 profiles = (ArrayList<Profile>) deserializableDate("profiles");
-		//profiles = new ArrayList<Profile>();
+		profiles = (ArrayList<Profile>) deserializableDate("profiles");
+		// profiles = new ArrayList<Profile>();
 		System.out.println(profiles.size());
 		Profile profile = new Profile();
 		profile.setName(JOptionPane.showInputDialog(null, "Input name: "));
@@ -50,6 +51,14 @@ public class Result {
 				return 0;
 			}
 		});
+		if (profiles.size() > 9) {
+			try {
+				profiles.remove(10);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Error delete from profiles!");
+			}
+
+		}
 		serializableDate("profiles", profiles);
 	}
 

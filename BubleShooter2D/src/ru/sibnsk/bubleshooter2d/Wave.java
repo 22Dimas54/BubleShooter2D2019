@@ -58,6 +58,14 @@ public class Wave {
 				int type = 2;
 				int rank = 2;
 				GamePanel.enemies.add(new Enemy(type, rank));
+				enemyCount -= type * waveNumber;
+			}
+		} else {
+			enemyCount = waveNumber * waveMultiplier;
+			while (enemyCount > 0) {
+				int type = 2;
+				int rank = 2;
+				GamePanel.enemies.add(new Enemy(type, rank));
 				enemyCount -= type * rank;
 			}
 		}

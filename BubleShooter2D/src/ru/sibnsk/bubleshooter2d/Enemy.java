@@ -35,7 +35,7 @@ public class Enemy {
 
 				r = 7;
 
-				speed = 2;
+				speed = 11;
 
 				health = 1;
 
@@ -88,6 +88,30 @@ public class Enemy {
 				dy = Math.cos(angle) * speed;
 			}
 		}
+	}
+
+	public double getDx() {
+		return dx;
+	}
+
+	public void setDx(double dx) {
+		this.dx = dx;
+	}
+
+	public double getDy() {
+		return dy;
+	}
+
+	public void setDy(double dy) {
+		this.dy = dy;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 
 	// Functions

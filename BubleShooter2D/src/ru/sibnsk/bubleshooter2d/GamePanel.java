@@ -44,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public static Wave wave;
 	public static Menue menue;
 	public static LifePlayer lifePlayer;
+	public static Bonus bonus;
 
 	// Constructor
 	public GamePanel() {
@@ -84,6 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
 		wave = new Wave();
 		menue = new Menue();
 		lifePlayer = new LifePlayer();
+		bonus = new Bonus();
 
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		BufferedImage buffered = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
@@ -202,8 +204,6 @@ public class GamePanel extends JPanel implements Runnable {
 			double dist = Math.sqrt(dx * dx + dy * dy);
 			if ((int) dist <= e.getR() + player.getR()) {
 				e.hit();
-				// player.hit();
-				// lifePlayer.update();
 				boolean remove = e.remove();
 				if (remove) {
 					enemies.remove(i);
@@ -216,6 +216,9 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 		// Wave update
 		wave.update();
+		// Bonus update
+		bonus.update();
+		background.update(this.g);
 
 	}
 
@@ -245,6 +248,9 @@ public class GamePanel extends JPanel implements Runnable {
 		if (wave.showWave()) {
 			wave.draw(g);
 		}
+
+		// Bonus draw
+		bonus.draw(g);
 	}
 
 	private void gameDraw() {
